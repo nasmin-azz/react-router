@@ -1,17 +1,22 @@
 import "./App.css";
-import useCounter from "./useCounter";
+import useFetch from "./useFetch";
 
 function App() {
-  let {count,increase,decrease} = useCounter();
+  let { data, error, loading } = useFetch("https://jsonplaceholder.typicode.com/posts");
+  if (loading) {
+    return <p>fetch is loading...</p>;
+  }
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <div>
-     <h1>{count}</h1>
-     <button onClick={increase}>increase</button>
-     <button onClick={decrease}>decrease</button>
-
+      <ul>
+        {data.map((item,index) => <li key={index}>{item.title}</li>)}
+      </ul>
     </div>
-  )
+  );
 }
 
 export default App;
