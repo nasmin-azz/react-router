@@ -1,23 +1,17 @@
-import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import NotFound from "./NotFound";
-import HomePage from "./HomePage";
-import ProductDetail from "./ProductDetail";
-
-
+import useCounter from "./useCounter";
 
 function App() {
+  let {count,increase,decrease} = useCounter();
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/ProductDetail/:id" element={<ProductDetail/>}/>
-        <Route path="*" element={<NotFound/>}/>
-      </Routes>
-    </Router>
-  );
+    <div>
+     <h1>{count}</h1>
+     <button onClick={increase}>increase</button>
+     <button onClick={decrease}>decrease</button>
+
+    </div>
+  )
 }
 
 export default App;
